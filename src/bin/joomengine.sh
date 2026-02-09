@@ -596,7 +596,7 @@ build_image() {
 	local LINE="$1"
 
 	# Skip empty lines
-	[[ -z "$LINE" ]] && continue
+	[[ -z "$LINE" ]] && return 0
 
 	# Parse required fields
 	read -r IMAGE CONTEXT_PATH BASE_TAG < <(
@@ -612,7 +612,7 @@ build_image() {
 	if docker image inspect "$FULL_BASE_IMAGE" >/dev/null 2>&1; then
 		echo "  ↪ Image already exists, skipping build: $FULL_BASE_IMAGE"
 		BUILT_IMAGES["$FULL_BASE_IMAGE"]=1
-		continue
+		return 0
 	fi
 
 	# --------------------------------------------------
@@ -620,7 +620,7 @@ build_image() {
 	# --------------------------------------------------
 	if [[ -n "${BUILT_IMAGES[$FULL_BASE_IMAGE]:-}" ]]; then
 		echo "  ↪ Skipping already-built (this run) $FULL_BASE_IMAGE"
-		continue
+		return 0
 	fi
 
 	echo
@@ -683,7 +683,7 @@ done < "$BUILD_MANIFEST_FILE"
 # --------------------------------------------------
 # build the latest image (last)
 # --------------------------------------------------
-while IFS= read -r LINE || [[ -n "$line" ]]; do
+while IFS= read -r line || [[ -n "$line" ]]; do
 	[[ -z "$line" ]] && continue
 
 	latest=$(echo "$line" | jq -r '.latest')
@@ -701,5 +701,3 @@ if [[ "$DRY_RUN" == "no" ]] && [[ "$BUILD_ONLY" == "no" ]]; then
 else
 	echo "ℹ️  Push skipped (dry-run or build-only)"
 fi
-
-
