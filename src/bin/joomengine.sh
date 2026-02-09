@@ -422,6 +422,8 @@ for i in "${!REL_VERSION[@]}"; do
 
 			IS_APACHE="no"
 			IS_HIGHEST_PHP="no"
+			IS_LATEST="no"
+
 			[[ "$VARIANT" == "apache" ]] && IS_APACHE="yes"
 			[[ "$PHP" == "$HIGHEST_PHP" ]] && IS_HIGHEST_PHP="yes"
 
@@ -483,6 +485,7 @@ for i in "${!REL_VERSION[@]}"; do
 			   [[ "$IS_APACHE" == "yes" ]] && \
 			   [[ "$IS_HIGHEST_PHP" == "yes" ]]; then
 				emit_once "latest"
+				IS_LATEST="yes"
 			fi
 
 			# ---- Pre-release rolling tags
@@ -535,6 +538,7 @@ for i in "${!REL_VERSION[@]}"; do
 				--arg image "$IMAGE_NAME" \
 				--arg context "$context_path" \
 				--arg version "$VERSION" \
+				--arg latest "$IS_LATEST" \
 				--arg major "$V_MAJOR" \
 				--arg minor "$V_MINOR" \
 				--arg php "$PHP" \
@@ -545,6 +549,7 @@ for i in "${!REL_VERSION[@]}"; do
 					image: $image,
 					context: $context,
 					version: $version,
+					latest: $latest,
 					major: $major,
 					minor: $minor,
 					php: $php,
@@ -587,7 +592,9 @@ echo "▶ Building Docker images from manifest"
 
 declare -A BUILT_IMAGES=()
 
-while IFS= read -r LINE || [[ -n "$LINE" ]]; do
+build_image() {
+	local LINE="$1"
+
 	# Skip empty lines
 	[[ -z "$LINE" ]] && continue
 
@@ -658,7 +665,32 @@ while IFS= read -r LINE || [[ -n "$LINE" ]]; do
 			fi
 		fi
 	done
+}
 
+# --------------------------------------------------
+# build the all images except the latest image (first)
+# --------------------------------------------------
+while IFS= read -r line || [[ -n "$line" ]]; do
+	[[ -z "$line" ]] && continue
+
+	latest=$(echo "$line" | jq -r '.latest')
+
+	[[ "$latest" == "yes" ]] && continue
+
+	build_image "$line"
+done < "$BUILD_MANIFEST_FILE"
+
+# --------------------------------------------------
+# build the latest image (last)
+# --------------------------------------------------
+while IFS= read -r LINE || [[ -n "$line" ]]; do
+	[[ -z "$line" ]] && continue
+
+	latest=$(echo "$line" | jq -r '.latest')
+
+	[[ "$latest" == "no" ]] && continue
+
+	build_image "$line"
 done < "$BUILD_MANIFEST_FILE"
 
 echo
