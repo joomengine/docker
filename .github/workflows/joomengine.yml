@@ -1,13 +1,8 @@
 name: JoomEngine – Automated Build & Version Tracking
 
 on:
-  push:
-    branches:
-      - master
-
-  schedule:
-    # Runs every Monday at 03:33 CAT (01:33 UTC)
-    - cron: "33 1 * * 1"
+  repository_dispatch:
+    types: [ pkg-component-builder-updated ]
 
   workflow_dispatch:
 
@@ -17,7 +12,7 @@ permissions:
 
 jobs:
   build-and-publish:
-    name: Run joomengine.sh and track changes
+    name: Run ./src/bin/joomengine.sh and track changes
     runs-on: ubuntu-latest
 
     steps:
@@ -53,7 +48,7 @@ jobs:
       # --------------------------------------------------
       # RUN SCRIPT
       # --------------------------------------------------
-      - name: Run joomengine.sh
+      - name: Run ./src/bin/joomengine.sh
         run: |
           chmod +x ./src/bin/joomengine.sh
           ./src/bin/joomengine.sh
