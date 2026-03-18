@@ -19,8 +19,8 @@ LABEL org.opencontainers.image.source="https://github.com/octoleo/joomengine"
 # JCB metadata (required at build-time)
 # -----------------------------------------------------------------------------
 ENV JCB_VERSION 6.1.5-beta
-ENV JCB_SHA512 0b810ce5be14de23392b60e6271d9f68716ae227f45ea4d824f1cfe5d194e6afac715f616d212152ade3049211874e47f9260d5118efa9d8017e7010ccdaa47e
-ENV JCB_PACKAGE https://github.com/joomengine/pkg-component-builder/archive/refs/tags/v6.1.5-beta2.zip
+ENV JCB_SHA512 1f700f27be24341f5ba0c9c4918a6e9642bf84fb422f4d659efe6c7a6485309448547f28671a5cfbb8c9ec43e94f419612c50403139c41529a67b2edbf48b806
+ENV JCB_PACKAGE https://github.com/joomengine/pkg-component-builder/archive/refs/tags/v6.1.5-beta3.zip
 ENV JCB_INSTALL_DIR /usr/src/joomengine
 
 # -----------------------------------------------------------------------------
