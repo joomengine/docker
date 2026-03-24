@@ -16,23 +16,6 @@ LABEL org.opencontainers.image.version="4.1.0"
 LABEL org.opencontainers.image.source="https://github.com/octoleo/joomengine"
 
 # -----------------------------------------------------------------------------
-# Security hardening (version-agnostic Python removal ;)
-# -----------------------------------------------------------------------------
-RUN set -eux; \
-	PY_PKGS="$(dpkg-query -W -f='${Package}\n' 'python*' 2>/dev/null || true)"; \
-	if [ -n "$PY_PKGS" ]; then \
-		apt-get purge -y --auto-remove $PY_PKGS; \
-	fi; \
-	rm -rf \
-		/usr/lib/python* \
-		/usr/local/lib/python* \
-		/usr/share/doc/python* \
-		/usr/bin/python* \
-	; \
-	apt-get clean; \
-	rm -rf /var/lib/apt/lists/*
-
-# -----------------------------------------------------------------------------
 # JCB metadata (required at build-time)
 # -----------------------------------------------------------------------------
 ENV JCB_VERSION 4.1.0
@@ -52,10 +35,10 @@ RUN set -eux; \
 # -----------------------------------------------------------------------------
 # JCB entrypoint
 # -----------------------------------------------------------------------------
-COPY docker-entrypoint.sh /jcb-entrypoint.sh
+COPY docker-entrypoint.sh /entrypoint.sh
 RUN set -eux; \
-	chmod +x /jcb-entrypoint.sh
+	chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/jcb-entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["apache2-foreground"]
 

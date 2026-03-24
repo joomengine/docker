@@ -35,10 +35,10 @@ RUN set -eux; \
 # -----------------------------------------------------------------------------
 # JCB entrypoint
 # -----------------------------------------------------------------------------
-COPY docker-entrypoint.sh /jcb-entrypoint.sh
+COPY docker-entrypoint.sh /entrypoint.sh
 RUN set -eux; \
-	chmod +x /jcb-entrypoint.sh
+	chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/jcb-entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["php-fpm"]
 
