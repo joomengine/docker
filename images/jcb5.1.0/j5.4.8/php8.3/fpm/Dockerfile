@@ -6,7 +6,7 @@
 # -----------------------------------------------------------------------------
 # Official JCB v5.1.0 image: extend the official Joomla! v5.4.8 image
 # -----------------------------------------------------------------------------
-FROM joomla:5.4.8-php8.3-fpm
+FROM joomla:5.4.8-php8.3-fpm@sha256:fb280bc3e74570751c3c59ffc08dfc232762a7315e9297417fc7ffe03cd191b8
 
 # Metadata
 LABEL maintainer="Llewellyn van der Merwe <llewellyn.van-der-merwe@community.joomla.org> (@Llewellynvdm), Lemuel van der Merwe <lemuel.van-der-merwe@community.joomla.org> (@lemuelvdm)"
@@ -14,6 +14,8 @@ LABEL org.opencontainers.image.title="Joomla! Component Builder - JoomEngine"
 LABEL org.opencontainers.image.description="Joomla! v5.4.8 + Component Builder v5.1.0"
 LABEL org.opencontainers.image.version="5.1.0"
 LABEL org.opencontainers.image.source="https://github.com/octoleo/joomengine"
+LABEL org.opencontainers.image.base.name="docker.io/library/joomla:5.4.8-php8.3-fpm"
+LABEL org.opencontainers.image.base.digest="sha256:fb280bc3e74570751c3c59ffc08dfc232762a7315e9297417fc7ffe03cd191b8"
 
 # -----------------------------------------------------------------------------
 # JCB metadata (required at build-time)
@@ -41,4 +43,3 @@ RUN set -eux; \
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["php-fpm"]
-
