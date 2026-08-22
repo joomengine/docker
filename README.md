@@ -1,6 +1,9 @@
 # Joomla Component Builder - Official Docker Images
 
-[![JoomEngine - Automated Build & Version Tracking](https://github.com/octoleo/joomengine/actions/workflows/joomengine.yml/badge.svg?branch=master)](https://github.com/octoleo/joomengine/actions/workflows/joomengine.yml)
+[![JoomEngine - Build](https://img.shields.io/github/actions/workflow/status/octoleo/joomengine/joomengine.yml?branch=master&style=for-the-badge&logo=githubactions&logoColor=fff&label=build)](https://github.com/octoleo/joomengine/actions/workflows/joomengine.yml)
+[![JoomEngine - Quality](https://img.shields.io/github/actions/workflow/status/octoleo/joomengine/quality.yml?branch=master&style=for-the-badge&logo=githubactions&logoColor=fff&label=quality)](https://github.com/octoleo/joomengine/actions/workflows/quality.yml)
+[![JoomEngine - Joomla](https://img.shields.io/github/actions/workflow/status/octoleo/joomengine/joomla-release-poll.yml?branch=master&style=for-the-badge&logo=joomla&logoColor=fff&label=joomla)](https://github.com/octoleo/joomengine/actions/workflows/joomla-release-poll.yml)
+[![JoomEngine - Docker](https://img.shields.io/docker/pulls/octoleo/joomengine?style=for-the-badge&logo=docker&logoColor=fff&color=005AA4&label=docker.io%20pulls)](https://hub.docker.com/r/octoleo/joomengine)
 
 This repository contains the **official Docker image build system** for
 **Joomla Component Builder (JCB)**.
