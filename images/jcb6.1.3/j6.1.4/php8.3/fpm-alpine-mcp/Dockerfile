@@ -11,7 +11,7 @@ FROM joomla:6.1.4-php8.3-fpm-alpine@sha256:548ed8eb8b77c7bbd6c2d4e64ccaa208c8c01
 # Metadata
 LABEL maintainer="Llewellyn van der Merwe <llewellyn.van-der-merwe@community.joomla.org> (@Llewellynvdm), Lemuel van der Merwe <lemuel.van-der-merwe@community.joomla.org> (@lemuelvdm)"
 LABEL org.opencontainers.image.title="Joomla! Component Builder - JoomEngine"
-LABEL org.opencontainers.image.description="Joomla! v6.1.4 + Component Builder v6.1.3 + JoomEngine MCP v1.0.5"
+LABEL org.opencontainers.image.description="Joomla! v6.1.4 + Component Builder v6.1.3 + JoomEngine MCP v1.0.6"
 LABEL org.opencontainers.image.version="6.1.3"
 LABEL org.opencontainers.image.source="https://github.com/octoleo/joomengine"
 LABEL org.opencontainers.image.base.name="docker.io/library/joomla:6.1.4-php8.3-fpm-alpine"
@@ -37,12 +37,12 @@ RUN set -eux; \
 # -----------------------------------------------------------------------------
 # Optional JoomEngine MCP package (component and plugins, pinned at image build)
 # -----------------------------------------------------------------------------
-LABEL org.joomengine.mcp.version="1.0.5"
-LABEL org.joomengine.mcp.sha512="94a58198ae09e5c510f902e59579f6f9762fbbb17939ac29968e886aa69871c85ee1aa15c2e2b29b4ec0a48b4025eccabb710f89655892fe9aee470eefaab745"
-LABEL org.joomengine.mcp.source="https://github.com/joomengine/mcp_package/archive/refs/tags/v1.0.5.zip"
-ENV MCP_VERSION=1.0.5
-ENV MCP_SHA512=94a58198ae09e5c510f902e59579f6f9762fbbb17939ac29968e886aa69871c85ee1aa15c2e2b29b4ec0a48b4025eccabb710f89655892fe9aee470eefaab745
-ENV MCP_PACKAGE=https://github.com/joomengine/mcp_package/archive/refs/tags/v1.0.5.zip
+LABEL org.joomengine.mcp.version="1.0.6"
+LABEL org.joomengine.mcp.sha512="46ef7cb59b8371aaeb25232c9f88ba7002f215be6a7404b802be1ac1ac15ecd52771874b9c016fd7453f7e46a2a36ca93a9d8ff4326105dee83341ec07638497"
+LABEL org.joomengine.mcp.source="https://github.com/joomengine/mcp_package/archive/refs/tags/v1.0.6.zip"
+ENV MCP_VERSION=1.0.6
+ENV MCP_SHA512=46ef7cb59b8371aaeb25232c9f88ba7002f215be6a7404b802be1ac1ac15ecd52771874b9c016fd7453f7e46a2a36ca93a9d8ff4326105dee83341ec07638497
+ENV MCP_PACKAGE=https://github.com/joomengine/mcp_package/archive/refs/tags/v1.0.6.zip
 
 RUN set -eux; \
 	curl -fSL "$MCP_PACKAGE" -o "$JCB_INSTALL_DIR/mcp.zip"; \
